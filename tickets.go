@@ -8,9 +8,9 @@ import (
 
 func main() {
 	rand.Seed(time.Now().UnixNano())                                   //задает в параметрах рандомизатора использование текущего времени
-	distance := 62100000                                               //расстояние
-	maxSpeed := 30                                                     //максимальная скорость
-	minSpeed := 16                                                     //минимальная скорость
+	distance := 62100000                                               //расстояние в Км
+	maxSpeed := 30                                                     //максимальная скорость Км/с
+	minSpeed := 16                                                     //минимальная скорость Км/с
 	secondsInDays := 24 * 60 * 60                                      //секунд в дне
 	var minDays float64 = float64(distance / maxSpeed / secondsInDays) //минимальное количество дней для перелета
 	var maxDays float64 = float64(distance / minSpeed / secondsInDays) //максимальное...
