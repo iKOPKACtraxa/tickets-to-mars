@@ -1,5 +1,5 @@
 # tickets-to-mars
-Это простая программа для обучения синтаксису golang.
+This is a simple program made for learning golang syntax.
 
-Задание взято отсюда https://golangs.org/code-ticket
-Результат работы программы можно посмотреть тут на плэйграунд
+Exercise has taken from here: https://golangs.org/code-ticket
+The result of this program you can get from Playground here: 
