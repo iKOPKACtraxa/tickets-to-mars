@@ -7,24 +7,23 @@ import (
 )
 
 func main() {
-	rand.Seed(time.Now().UnixNano())                                   //задает в параметрах рандомизатора использование текущего времени
-	distance := 62100000                                               //расстояние в Км
-	maxSpeed := 30                                                     //максимальная скорость Км/с
-	minSpeed := 16                                                     //минимальная скорость Км/с
-	secondsInDays := 24 * 60 * 60                                      //секунд в дне
-	var minDays float64 = float64(distance / maxSpeed / secondsInDays) //минимальное количество дней для перелета
-	var maxDays float64 = float64(distance / minSpeed / secondsInDays) //максимальное...
-	minCost := 36                                                      //минимальная цена билета
-	var addCostToMax float64 = 50 - 36                                 //доплата до максимальной цены билета
+	rand.Seed(time.Now().UnixNano())                                   //use random number as a function of time
+	distance := 62100000                                               //kilometers
+	maxSpeed := 30                                                     //max speed km/s
+	minSpeed := 16                                                     //min speed km/s
+	secondsInDays := 24 * 60 * 60                                      //
+	var minDays float64 = float64(distance / maxSpeed / secondsInDays) //min amount of days for one way flight
+	var maxDays float64 = float64(distance / minSpeed / secondsInDays) //max amount of days for one way flight
+	minCost := 36                                                      //min costs for ticket
+	var addCostToMax float64 = 50 - 36                                 //surcharge to get the maximum ticket price
 
-	//шапка таблицы
+	//top of the table
 	fmt.Printf("%-17v %4v %10v %5v\n", "Spaceline", "Days", "Trip type", "Price")
 	fmt.Println("=======================================")
 
-	//запуск цикла для вывода строк таблицы
 	for i := 0; i < 10; i++ {
 
-		//Spaceline поле
+		//Spaceline field
 		spaceline := "Space Adventures"
 		switch rand.Intn(3) {
 		case 0:
@@ -33,23 +32,23 @@ func main() {
 			spaceline = "SpaceX"
 		}
 
-		//Days поле
-		speed := rand.Intn(maxSpeed-minSpeed+1) + minSpeed //для дней нужно сначала рассчитать скорость в диапазоне MinMax
+		//Days field
+		speed := rand.Intn(maxSpeed-minSpeed+1) + minSpeed //for Days we need to get the speed between min max speed
 		var days float64 = float64(distance / speed / secondsInDays)
 
 		//Trip type
-		roundtrip := 2 //по умолчанию у нас полет туда-обратно
+		roundtrip := 2 //by default we have two-way trip
 		roundtripName := "Round-trip"
-		if rand.Intn(2) == 1 { //переопределение на one-way
+		if rand.Intn(2) == 1 { //change for one-way trip
 			roundtrip = 1
 			roundtripName = "One-way"
 		}
 
-		//Price поле, рассчитывается сложной формулой так как самые быстрые полеты стоят дополнительную плату,
-		//а самые медленные полеты будут без дополнительной платы
+		//Price field, calculated by complex formula, as faster trips costs extra payment,
+		//and slowest will be for minimum amount
 		price := roundtrip * (minCost + int(addCostToMax*(1-(days-minDays)/(maxDays-minDays))))
 
-		//line, вывод строки
+		//print one line
 		fmt.Printf("%-17v %4v %10v %5v\n", spaceline, days, roundtripName, price)
 	}
 }
